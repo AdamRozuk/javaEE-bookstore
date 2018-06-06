@@ -7,9 +7,9 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body style="background-image: url(https://www.walldevil.com/wallpapers/a74/glass-window-rain-city.jpg);background-repeat: no-repeat;
-      background-size: cover;">
+      background-size: cover;box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);">
         <p:link value="Books" outcome="/book/book_list.xhtml" />
-        <h:form>
+        <h:form style="width: 40%;margin: auto;margin-top: 10%;">
             <p:panel header="Log in">
                 <p:growl id="growl" sticky="true"  life="3000" />
                 <h:panelGrid columns="2" cellpadding="5">
@@ -19,6 +19,7 @@
                     <p:password id="password" value="#{loginBean.password}" required="true" label="password" />
                 </h:panelGrid>
                 <p:commandButton value="Login" update="growl" action="#{loginBean.login}" />
+                <p:commandButton class="loginAsGuest btn" style="margin-left: 20px;" immediate="true" action="/book/book_list.xhtml?faces-redirect=true" value="Login as guest"/>
             </p:panel>
         </h:form>
     </h:body>

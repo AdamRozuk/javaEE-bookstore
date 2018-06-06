@@ -1,0 +1,8 @@
+.login_entry{
+	background-image: url(https://www.walldevil.com/wallpapers/a74/glass-window-rain-city.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.login_entry .btn{
+	margin-left: 20px;
+}

@@ -29,14 +29,26 @@ public class BookBean implements Serializable {
     public void onRemoveBook(Book b) {
         dao.remove(b.getId());
     }
-
+    
+    public void onUpdateBook(Book b) {
+        newBook = dao.findById(b.getId());
+        System.out.println("updatebook_qwertyasdfgh" + b.getId());
+    }
+    
     public void onBookAdd() {
         newBook = new Book();
     }
     
-    public void onBookAdded() {
-        dao.save(newBook);
-        RequestContext.getCurrentInstance().execute("PF('BookDlg').hide()");
+    public void onBookAdded(Integer ou) {
+        if(ou.equals(0)){
+            dao.save(newBook);
+            RequestContext.getCurrentInstance().execute("PF('BookDlg').hide()");
+        }
+        else {
+            dao.update(newBook);
+            RequestContext.getCurrentInstance().execute("PF('BookDlg').hide()");
+            System.out.println("qwertyasdfgh" + ou);
+        }
     }  
 
     public Book getNewBook() {

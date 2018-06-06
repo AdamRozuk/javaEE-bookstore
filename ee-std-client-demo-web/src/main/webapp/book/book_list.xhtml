@@ -23,6 +23,9 @@
             </p:panel>
 
             <p:dataTable id="bookTable" value="#{bookBean.books}" var="book" >
+                <p:column headerText="ID" >
+                    #{book.id}
+                </p:column>
                 <p:column headerText="Title" >
                     #{book.title}
                 </p:column>
@@ -37,6 +40,10 @@
                 <p:column rendered="#{userBean.logged}" headerText="Remove" >
                     <p:commandButton icon="ui-icon-trash" title="Remove" action="#{bookBean.onRemoveBook(book)}" update="bookTable" />
                 </p:column>
+                <p:column rendered="#{userBean.logged}" headerText="Edit" >
+                    <p:commandButton icon="ui-icon-pencil" title="Edit" action="#{bookBean.onUpdateBook(book)}" oncomplete="PF('BookDlg').show()" update=":BookDlgId" >
+                    </p:commandButton>
+                </p:column>
             </p:dataTable>
             <p:commandButton rendered="#{userBean.logged}" value="Add book" action="#{bookBean.onBookAdd()}" oncomplete="PF('BookDlg').show()" update=":BookDlgId" />
         </h:form>
@@ -44,6 +51,8 @@
         <p:dialog id="BookDlgId" widgetVar="BookDlg" dynamic="true" modal="true" >
             <h:form>
                 <p:panelGrid columns="2">
+                    <p:outputLabel value="ID" for="bookId"/>
+                    <p:inputText id="bookId" value="#{bookBean.newBook.id}" required="false" />
                     <p:outputLabel value="Title" for="titleId"/>
                     <p:inputText id="titleId" value="#{bookBean.newBook.title}" required="true" />
                     <p:outputLabel value="Author" for="authorId"/>
@@ -54,7 +63,8 @@
                     </p:inputText>
                 </p:panelGrid>
                 <p:commandButton  value="Cancel" type="button" onclick="PF('BookDlg').hide()"  />
-                <p:commandButton value="Ok" action="#{bookBean.onBookAdded}"  update=":booksForm:growl :booksForm:bookTable" />
+                <p:commandButton value="Ok" action="#{bookBean.onBookAdded(0)}"  update=":booksForm:growl :booksForm:bookTable" />
+                <p:commandButton value="Update" action="#{bookBean.onBookAdded(bookBean.newBook.id)}"  update=":booksForm:growl :booksForm:bookTable" />
             </h:form>
         </p:dialog>
     </h:body>
