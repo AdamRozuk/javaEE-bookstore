@@ -2,12 +2,46 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        This page can be viewed by logged users.
+        <h:form id="cartsForm">
+            <p:growl id="growl" showDetail="true"  />
+            <p:panel header="My Cart">
+                <p:outputPanel rendered="#{!userBean.logged}">
+                    <p:button value="Login" outcome="/login.xhtml" style="margin-right: 10px;"/>
+                    <h:outputText value="You are not logged in! Add/Remove options are not available"/>
+
+                </p:outputPanel>
+                <p:outputPanel rendered="#{userBean.logged}">
+                    <p:commandButton value="Logout" action="#{loginBean.logout}" style="margin-right: 10px;"/>
+                    <h:outputText value="You are logged in as: #{userBean.username}"/>
+                </p:outputPanel>
+            </p:panel>
+            <p:dataTable id="cartTable" value="#{cartBean.carts}" var="cart" >
+                <p:column headerText="ID" >
+                    <ui:fragment rendered="#{cart.userCredentials_ID == userBean.id}">#{cart.id}</ui:fragment>
+                </p:column>
+                <p:column headerText="Book Title">
+                    <ui:fragment rendered="#{cart.userCredentials_ID == userBean.id}">#{(bookBean.findBookByID(cart.book_ID).title)}</ui:fragment>
+                </p:column>
+                <p:column headerText="Book Author">
+                    <ui:fragment rendered="#{cart.userCredentials_ID == userBean.id}">#{(bookBean.findBookByID(cart.book_ID).author)}</ui:fragment>
+                </p:column>
+                <p:column headerText="Book Price">
+                    <ui:fragment rendered="#{cart.userCredentials_ID == userBean.id}">#{(bookBean.findBookByID(cart.book_ID).price)}</ui:fragment>
+                </p:column>
+                <p:column rendered="#{userBean.logged}" headerText="Remove" >
+                    <ui:fragment rendered="#{cart.userCredentials_ID == userBean.id}">
+                        <p:commandButton icon="ui-icon-trash" title="Remove" action="#{cartBean.onRemoveCart(cart)}" update="cartTable" />
+                    </ui:fragment>
+                </p:column>
+            </p:dataTable>
+        </h:form>
         <p:link value="Back to books" outcome="/book/book_list.xhtml" />
     </h:body>
 </html>

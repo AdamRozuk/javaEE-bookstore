@@ -12,8 +12,10 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.ServletException;
-
+import wipb.jee.clientdemo.model.UserCredentials;
 import wipb.jee.clientdemo.ejb.UserCredentialsDao;
+import wipb.jee.clientdemo.model.Book;
+import wipb.jee.clientdemo.model.Cart;
 import wipb.jee.clientdemo.web.util.JSF;
 
 @Named
@@ -28,7 +30,17 @@ public class LoginBean implements Serializable {
 
     private String username;
     private String password;
+    private Cart cart;
+    private Long id;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public String getUsername() {
         return username;
     }
@@ -44,11 +56,23 @@ public class LoginBean implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    
+    public void addToCart(Book b) throws IOException, ServletException {
+        System.out.println("LoginBean " + b.getTitle() + " " + userBean.getUsername());
+        //user.add(b);
+        System.out.println("usename via dao " + userCredentialsDao.findByUsername(userBean.getUsername()).getUsername());
+        System.out.println("password via dao " + userCredentialsDao.findByUsername(userBean.getUsername()).getPassword());
+        //userCredentialsDao.findByUsernameAndPassword(userCredentialsDao.findByUsername(userBean.getUsername()).getUsername(),userCredentialsDao.findByUsername(userBean.getUsername()).getPassword()).addBook(b);
+        //System.out.println(userCredentialsDao.findByUsernameAndPassword(userCredentialsDao.findByUsername(userBean.getUsername()).getUsername(),userCredentialsDao.findByUsername(userBean.getUsername()).getPassword()).getUserCart());
+        //cart.setUser(userCredentialsDao.findByUsernameAndPassword(userCredentialsDao.findByUsername(userBean.getUsername()).getUsername(),userCredentialsDao.findByUsername(userBean.getUsername()).getPassword()));
+        //cart.setBook(b);
+    }
+    
     // akcja logowania
     public void login() throws IOException, ServletException {
         if (userCredentialsDao.findByUsernameAndPassword(username, password) != null) {
             userBean.setUsername(username);
+            userBean.setId(userCredentialsDao.findByUsernameAndPassword(userCredentialsDao.findByUsername(userBean.getUsername()).getUsername(),userCredentialsDao.findByUsername(userBean.getUsername()).getPassword()).getId());
             JSF.redirect("book/book_list.xhtml");
         } else {
             JSF.addErrorMessage("Invalid credentials");

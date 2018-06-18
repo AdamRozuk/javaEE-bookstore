@@ -18,7 +18,7 @@
                 </p:outputPanel>
                 <p:outputPanel rendered="#{userBean.logged}">
                     <p:commandButton value="Logout" action="#{loginBean.logout}" style="margin-right: 10px;"/>
-                    <h:outputText value="You are logged in as: #{userBean.username}"/>
+                    <h:outputText value="You are logged in as: #{userBean.id}"/>
                 </p:outputPanel>
             </p:panel>
 
@@ -44,10 +44,14 @@
                     <p:commandButton icon="ui-icon-pencil" title="Edit" action="#{bookBean.onUpdateBook(book)}" oncomplete="PF('BookDlg').show()" update=":BookDlgId" >
                     </p:commandButton>
                 </p:column>
+                <p:column rendered="#{userBean.logged}" headerText="Add to cart" >
+                    <p:commandButton icon="ui-icon-check" title="Add to cart" action="#{cartBean.addToCart(book)}" update="bookTable" >
+                    </p:commandButton>
+                </p:column>
             </p:dataTable>
             <p:commandButton rendered="#{userBean.logged}" value="Add book" action="#{bookBean.onBookAdd()}" oncomplete="PF('BookDlg').show()" update=":BookDlgId" />
         </h:form>
-        <p:link value="Link to protected page" outcome="/restricted/restricted.xhtml" />
+        <p:link value="My Cart" outcome="/restricted/restricted.xhtml" />
         <p:dialog id="BookDlgId" widgetVar="BookDlg" dynamic="true" modal="true" >
             <h:form>
                 <p:panelGrid columns="2">

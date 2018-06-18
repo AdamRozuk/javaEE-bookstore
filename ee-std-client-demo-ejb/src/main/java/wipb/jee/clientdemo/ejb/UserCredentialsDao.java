@@ -19,4 +19,9 @@ public class UserCredentialsDao extends AbstractDao<UserCredentials,Long> {
                 .setParameter("pw",password)
                 .getResultList().stream().findFirst().orElse(null);
     }
+    public UserCredentials findByUsername(String username) {
+        return em.createNamedQuery("UserCredentials.findByUsername", UserCredentials.class)
+                .setParameter("un", username)
+                .getResultList().stream().findFirst().orElse(null);
+    }
 }

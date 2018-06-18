@@ -9,10 +9,13 @@ import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.context.RequestContext;
 import wipb.jee.clientdemo.ejb.BookDao;
+import wipb.jee.clientdemo.ejb.UserCredentialsDao;
 import wipb.jee.clientdemo.model.Book;
+import wipb.jee.clientdemo.model.UserGroup;
 
 @Named
 @ViewScoped
@@ -20,8 +23,17 @@ public class BookBean implements Serializable {
     @EJB
     private BookDao dao;
     
+    @Inject
+    private UserBean userBean;
+    
+    private UserGroup usrGroup;
+    
     private Book newBook = new Book();
-
+    
+    public Book findBookByID(Long id) {
+        return dao.findById(id);
+    }
+            
     public List<Book> getBooks() {
         return dao.findAll();
     }
@@ -32,7 +44,6 @@ public class BookBean implements Serializable {
     
     public void onUpdateBook(Book b) {
         newBook = dao.findById(b.getId());
-        System.out.println("updatebook_qwertyasdfgh" + b.getId());
     }
     
     public void onBookAdd() {
@@ -41,16 +52,16 @@ public class BookBean implements Serializable {
     
     public void onBookAdded(Integer ou) {
         if(ou.equals(0)){
+            //newBook.addUser(usrGroup.getUserCredentials());
             dao.save(newBook);
             RequestContext.getCurrentInstance().execute("PF('BookDlg').hide()");
         }
         else {
             dao.update(newBook);
             RequestContext.getCurrentInstance().execute("PF('BookDlg').hide()");
-            System.out.println("qwertyasdfgh" + ou);
         }
-    }  
-
+    }
+    
     public Book getNewBook() {
         return newBook;
     }
