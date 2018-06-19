@@ -25,27 +25,8 @@ public class UserCredentials {
     private List<UserGroup> userGroups =  new LinkedList<>();
     //@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     //private List<Cart> cartList =  new LinkedList<>();
-    @ManyToOne
-    private Book book;
-    @ManyToMany(mappedBy = "users")
-    private List<Book> books = new LinkedList<>();
 
-    public Book getBook() {
-        return book;
-    }
 
-    public void setBook(Book book) {
-        this.book = book;
-    }
-    
-    
-    public List<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(List<Book> books) {
-        this.books = books;
-    }
     
     public Long getId() {
         return id;

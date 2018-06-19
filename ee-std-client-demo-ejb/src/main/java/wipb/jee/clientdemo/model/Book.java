@@ -38,15 +38,7 @@ public class Book implements Serializable {
     )
     private List<UserCredentials> users = new LinkedList<>();
 
-    public void addUser(UserCredentials user) {
-        users.add(user);
-        user.getBooks().add(this);
-    }
 
-    public void removeUser(UserCredentials user) {
-        users.remove(user);
-        user.getBooks().remove(this);
-    }
 
     public List<UserCredentials> getUsers() {
         return users;
