@@ -68,9 +68,11 @@ public class CartBean implements Serializable{
         dao2.remove(c.getId());
     }
     
-     public void onMailSend (Cart c){
-       Email.Send("gog172172@gmail.com","temat","wiadomosc");
-       SMS.Send("786842525","Wiadomość");
+     public void onMailSend (String title, String price){
+       String message;
+       message = "Witaj ! \n Kupiles ksiazke o tytule :" + title + " w cenie : " + price;
+       Email.Send("gog172172@gmail.com","Ksiegarnia jan&adam - potwierdzenie zakupu",message);
+       SMS.Send("786842525",message);
        
        //Email.Send("proagent333@gmail.com","temat","wiadomosc");
        //SMS.Send("721164152","Wiadomość");

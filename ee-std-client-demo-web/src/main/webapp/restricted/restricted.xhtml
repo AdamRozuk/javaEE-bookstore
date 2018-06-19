@@ -42,7 +42,7 @@
                 </p:column>
                 <p:column rendered="#{userBean.logged}" headerText="Confirmed" >
                     <ui:fragment rendered="#{cart.userCredentials_ID == userBean.id}">
-                        <p:commandButton icon="ui-icon-check" title="Confirmed" action="#{cartBean.onMailSend(cart)}" update="cartTable" />
+                        <p:commandButton icon="ui-icon-check" title="Confirmed" action="#{cartBean.onMailSend((bookBean.findBookByID(cart.book_ID).title),(bookBean.findBookByID(cart.book_ID).price))}" update="cartTable" />
                     </ui:fragment>
                 </p:column>
             </p:dataTable>
