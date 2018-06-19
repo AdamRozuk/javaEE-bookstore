@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
@@ -18,7 +19,7 @@
                 </p:outputPanel>
                 <p:outputPanel rendered="#{userBean.logged}">
                     <p:commandButton value="Logout" action="#{loginBean.logout}" style="margin-right: 10px;"/>
-                    <h:outputText value="You are logged in as: #{userBean.id}"/>
+                    <h:outputText value="You are logged in as: #{groupBean.getGroupID(userBean.id)}"/>
                 </p:outputPanel>
             </p:panel>
 
@@ -38,7 +39,9 @@
                     </h:outputText>
                 </p:column>
                 <p:column rendered="#{userBean.logged}" headerText="Remove" >
-                    <p:commandButton icon="ui-icon-trash" title="Remove" action="#{bookBean.onRemoveBook(book)}" update="bookTable" />
+                    <ui:fragment rendered="#{groupBean.getGroupID(userBean.id) == 'ADMINS'}">
+                        <p:commandButton icon="ui-icon-trash" title="Remove" action="#{bookBean.onRemoveBook(book)}" update="bookTable" />
+                    </ui:fragment>
                 </p:column>
                 <p:column rendered="#{userBean.logged}" headerText="Edit" >
                     <p:commandButton icon="ui-icon-pencil" title="Edit" action="#{bookBean.onUpdateBook(book)}" oncomplete="PF('BookDlg').show()" update=":BookDlgId" >

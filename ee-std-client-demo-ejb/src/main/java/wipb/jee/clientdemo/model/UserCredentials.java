@@ -26,7 +26,13 @@ public class UserCredentials {
     //@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     //private List<Cart> cartList =  new LinkedList<>();
 
-
+    public UserGroup findUserGroubById(Long id){
+        for(UserGroup usr : userGroups){
+            if(usr.getId().equals(id))
+                return usr;
+        }
+        return null;
+    }
     
     public Long getId() {
         return id;
