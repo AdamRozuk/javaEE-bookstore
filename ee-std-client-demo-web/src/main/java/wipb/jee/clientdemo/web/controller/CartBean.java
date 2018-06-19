@@ -11,6 +11,8 @@ import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import other.Email;
+import other.SMS;
 import wipb.jee.clientdemo.ejb.BookDao;
 import wipb.jee.clientdemo.ejb.CartDao;
 import wipb.jee.clientdemo.ejb.UserCredentialsDao;
@@ -64,5 +66,14 @@ public class CartBean implements Serializable{
     
     public void onRemoveCart(Cart c) {
         dao2.remove(c.getId());
+    }
+    
+     public void onMailSend (Cart c){
+       Email.Send("gog172172@gmail.com","temat","wiadomosc");
+       SMS.Send("786842525","Wiadomość");
+       
+       //Email.Send("proagent333@gmail.com","temat","wiadomosc");
+       //SMS.Send("721164152","Wiadomość");
+       
     }
 }

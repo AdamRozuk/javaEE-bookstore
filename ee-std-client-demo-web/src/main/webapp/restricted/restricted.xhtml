@@ -40,6 +40,11 @@
                         <p:commandButton icon="ui-icon-trash" title="Remove" action="#{cartBean.onRemoveCart(cart)}" update="cartTable" />
                     </ui:fragment>
                 </p:column>
+                <p:column rendered="#{userBean.logged}" headerText="Confirmed" >
+                    <ui:fragment rendered="#{cart.userCredentials_ID == userBean.id}">
+                        <p:commandButton icon="ui-icon-check" title="Confirmed" action="#{cartBean.onMailSend(cart)}" update="cartTable" />
+                    </ui:fragment>
+                </p:column>
             </p:dataTable>
         </h:form>
         <p:link value="Back to books" outcome="/book/book_list.xhtml" />
