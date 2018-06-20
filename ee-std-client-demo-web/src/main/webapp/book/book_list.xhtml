@@ -43,16 +43,19 @@
                         <p:commandButton icon="ui-icon-trash" title="Remove" action="#{bookBean.onRemoveBook(book)}" update="bookTable" />
                     </ui:fragment>
                 </p:column>
-                <p:column rendered="#{userBean.logged}" headerText="Edit" >
-                    <p:commandButton icon="ui-icon-pencil" title="Edit" action="#{bookBean.onUpdateBook(book)}" oncomplete="PF('BookDlg').show()" update=":BookDlgId" >
-                    </p:commandButton>
+                <p:column rendered="#{userBean.logged}" headerText="Edit" >        
+                    <ui:fragment rendered="#{groupBean.getGroupID(userBean.id) == 'ADMINS'}">
+                        <p:commandButton icon="ui-icon-pencil" title="Edit" action="#{bookBean.onUpdateBook(book)}" oncomplete="PF('BookDlg').show()" update=":BookDlgId" />
+                    </ui:fragment>
                 </p:column>
                 <p:column rendered="#{userBean.logged}" headerText="Add to cart" >
                     <p:commandButton icon="ui-icon-check" title="Add to cart" action="#{cartBean.addToCart(book)}" update="bookTable" >
                     </p:commandButton>
                 </p:column>
             </p:dataTable>
-            <p:commandButton rendered="#{userBean.logged}" value="Add book" action="#{bookBean.onBookAdd()}" oncomplete="PF('BookDlg').show()" update=":BookDlgId" />
+            <ui:fragment rendered="#{groupBean.getGroupID(userBean.id) == 'ADMINS'}">
+                <p:commandButton rendered="#{userBean.logged}" value="Add book" action="#{bookBean.onBookAdd()}" oncomplete="PF('BookDlg').show()" update=":BookDlgId" />
+            </ui:fragment>
         </h:form>
         <p:link value="My Cart" outcome="/restricted/restricted.xhtml" />
         <p:dialog id="BookDlgId" widgetVar="BookDlg" dynamic="true" modal="true" >
