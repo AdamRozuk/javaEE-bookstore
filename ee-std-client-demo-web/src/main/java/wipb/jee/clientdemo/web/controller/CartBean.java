@@ -80,7 +80,7 @@ public class CartBean implements Serializable{
        String message = "Witaj! \nKupiłeś książkę o tytule: " + title + " w cenie: " + price + "zł.\nDziękujemy za skorzystanie z naszych usług i mamy nadzieję, że korzystanie z nich sprawi, że życie Państwa będzie lepsze i bogatsze.\nŻyczymy miłej lektury!\nKsięgarnia jan&adam";
        Email.Send(email,"Ksiegarnia jan&adam - potwierdzenie zakupu",message);
        //System.out.println("tel :" + nrtel);
-       String message2 = "Witaj! Kupiles ksiazke o tytule: " + title + " w cenie: " + price + "zl. Ksiegarnia jan&adam";
+       String message2 = "Witaj! Kupiles ksiazke " + title + " w cenie " + price + "zl.";
        SMS.Send(nrtel,message2);
        
        //Email.Send("proagent333@gmail.com","temat","wiadomosc");
