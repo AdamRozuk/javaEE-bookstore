@@ -58,10 +58,11 @@ public class LoginBean implements Serializable {
     }
     
     public void addToCart(Book b) throws IOException, ServletException {
-        System.out.println("LoginBean " + b.getTitle() + " " + userBean.getUsername());
+      //  System.out.println("LoginBean " + b.getTitle() + " " + userBean.getUsername());
         //user.add(b);
-        System.out.println("usename via dao " + userCredentialsDao.findByUsername(userBean.getUsername()).getUsername());
-        System.out.println("password via dao " + userCredentialsDao.findByUsername(userBean.getUsername()).getPassword());
+       // System.out.println("usename via dao " + userCredentialsDao.findByUsername(userBean.getUsername()).getUsername());
+      //  System.out.println("password via dao " + userCredentialsDao.findByUsername(userBean.getUsername()).getPassword());
+        userCredentialsDao.findByUsernameAndPassword(userCredentialsDao.findByUsername(userBean.getUsername()).getUsername(),userCredentialsDao.findByUsername(userBean.getUsername()).getPassword()).getUserGroups();
         //userCredentialsDao.findByUsernameAndPassword(userCredentialsDao.findByUsername(userBean.getUsername()).getUsername(),userCredentialsDao.findByUsername(userBean.getUsername()).getPassword()).addBook(b);
         //System.out.println(userCredentialsDao.findByUsernameAndPassword(userCredentialsDao.findByUsername(userBean.getUsername()).getUsername(),userCredentialsDao.findByUsername(userBean.getUsername()).getPassword()).getUserCart());
         //cart.setUser(userCredentialsDao.findByUsernameAndPassword(userCredentialsDao.findByUsername(userBean.getUsername()).getUsername(),userCredentialsDao.findByUsername(userBean.getUsername()).getPassword()));

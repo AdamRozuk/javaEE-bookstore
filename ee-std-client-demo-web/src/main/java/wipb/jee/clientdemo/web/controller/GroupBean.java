@@ -42,7 +42,7 @@ public class GroupBean implements Serializable{
     }
     
     public String getGroupID(Long x){
-        System.out.println(userCredentialsDao.findById(x).findUserGroubById(x).getGroupname());
+     //   System.out.println(userCredentialsDao.findById(x).findUserGroubById(x).getGroupname());
         return userCredentialsDao.findById(x).findUserGroubById(x).getGroupname();
     }
     

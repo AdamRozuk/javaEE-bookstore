@@ -43,5 +43,9 @@ public class UserGroup {
     public void setUserCredentials(UserCredentials userCredentials) {
         this.userCredentials = userCredentials;
     }
+    
+    public Long getUserCredentialsId() {
+        return userCredentials.getId();
+    }
   
 }

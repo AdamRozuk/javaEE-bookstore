@@ -19,7 +19,7 @@
                 </p:outputPanel>
                 <p:outputPanel rendered="#{userBean.logged}">
                     <p:commandButton value="Logout" action="#{loginBean.logout}" style="margin-right: 10px;"/>
-                    <h:outputText value="You are logged in as: #{groupBean.getGroupID(userBean.id)}"/>
+                    <h:outputText value="You are logged in as: #{userBean.username}"/>
                 </p:outputPanel>
             </p:panel>
 

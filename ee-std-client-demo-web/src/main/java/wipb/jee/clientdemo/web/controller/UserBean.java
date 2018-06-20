@@ -13,6 +13,24 @@ public class UserBean implements Serializable {
     private String username;
     private Long id;
     private UserGroup usergroup;
+    private String email;
+    private String nrtel;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNrtel() {
+        return nrtel;
+    }
+
+    public void setNrtel(String nrtel) {
+        this.nrtel = nrtel;
+    }
 
 
     public Long getId() {

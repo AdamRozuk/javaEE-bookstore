@@ -25,6 +25,8 @@ public class UserCredentials {
     private List<UserGroup> userGroups =  new LinkedList<>();
     //@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     //private List<Cart> cartList =  new LinkedList<>();
+    private String email;
+    private String nrtel;
 
     public UserGroup findUserGroubById(Long id){
         for(UserGroup usr : userGroups){
@@ -33,6 +35,23 @@ public class UserCredentials {
         }
         return null;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNrtel() {
+        return nrtel;
+    }
+
+    public void setNrtel(String nrtel) {
+        this.nrtel = nrtel;
+    }
+    
     
     public Long getId() {
         return id;
