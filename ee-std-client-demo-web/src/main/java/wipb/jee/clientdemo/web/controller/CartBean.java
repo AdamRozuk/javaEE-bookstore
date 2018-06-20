@@ -69,7 +69,7 @@ public class CartBean implements Serializable{
     }
     
      public void onMailSend (String title, String price){
-       String message;
+       
        /*       userBean.setEmail("gog172172@gmail.com");
        userBean.setNrtel("786842525");
        email = userBean.getEmail();
@@ -77,10 +77,11 @@ public class CartBean implements Serializable{
        String email = userCredentialsDao.findByUsernameAndPassword(userCredentialsDao.findByUsername(userBean.getUsername()).getUsername(), userCredentialsDao.findByUsername(userBean.getUsername()).getPassword()).getEmail();
        String nrtel = userCredentialsDao.findByUsernameAndPassword(userCredentialsDao.findByUsername(userBean.getUsername()).getUsername(), userCredentialsDao.findByUsername(userBean.getUsername()).getPassword()).getNrtel();
        //System.out.println("testowanie : " + title + " " + price + " " + email + " " + nrtel);
-       message = "Witaj! \nKupiles ksiazke o tytule: " + title + " w cenie: " + price;
+       String message = "Witaj! \nKupiłeś książkę o tytule: " + title + " w cenie: " + price + "zł.\nDziękujemy za skorzystanie z naszych usług i mamy nadzieję, że korzystanie z nich sprawi, że życie Państwa będzie lepsze i bogatsze.\nŻyczymy miłej lektury!\nKsięgarnia jan&adam";
        Email.Send(email,"Ksiegarnia jan&adam - potwierdzenie zakupu",message);
        //System.out.println("tel :" + nrtel);
-       SMS.Send(nrtel,message);
+       String message2 = "Witaj! Kupiles ksiazke o tytule: " + title + " w cenie: " + price + "zl. Ksiegarnia jan&adam";
+       SMS.Send(nrtel,message2);
        
        //Email.Send("proagent333@gmail.com","temat","wiadomosc");
        //SMS.Send("721164152","Wiadomość");
